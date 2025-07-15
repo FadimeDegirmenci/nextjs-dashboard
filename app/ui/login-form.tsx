@@ -11,7 +11,6 @@ import { Button } from './button';
 import { signIn } from 'next-auth/react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
-
 export default function LoginForm() {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
@@ -23,7 +22,6 @@ export default function LoginForm() {
     setIsPending(true);
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
-
     const result = await signIn('credentials', {
       redirect: false,
       email,
@@ -32,7 +30,6 @@ export default function LoginForm() {
     });
 
     setIsPending(false);
-
     if (result?.error) {
       setErrorMessage('Invalid email or password');
     } else {
@@ -87,12 +84,10 @@ export default function LoginForm() {
             </div>
           </div>
         </div>
-
         <input type="hidden" name="callbackUrl" value={callbackUrl} />
         <Button className="mt-4 w-full" aria-disabled={isPending}>
           Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
         </Button>
-
         <div className="flex h-8 items-end space-x-1">
           {errorMessage && (
             <>
